@@ -14,7 +14,7 @@ from pathlib import Path
 
 from config import load_config, Config
 
-config: Config = load_config(".env")
+# config: Config = load_config(".env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config.misc.secret_key
+SECRET_KEY = "dwdwqedfwerfsafwe"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,17 +79,23 @@ WSGI_APPLICATION = 'support_proj.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config.db.name,
-        'USER': config.db.user,
-        'PASSWORD': config.db.password,
-        'HOST': config.db.host,
-        'PORT': config.db.port,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase', # This is where you put the name of the db file.
+                 # If one doesn't exist, it will be created at migration time.
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config.db.name,
+#         'USER': config.db.user,
+#         'PASSWORD': config.db.password,
+#         'HOST': config.db.host,
+#         'PORT': config.db.port,
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
