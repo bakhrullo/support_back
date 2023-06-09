@@ -34,7 +34,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 admin.site.unregister(Group)
 admin.site.register(Agency, AgencyAdmin)
-admin.site.register(Counter)
+# admin.site.register(Counter)
 admin.site.register(Agent, AgentAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Contract, ContractAdmin)
