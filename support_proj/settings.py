@@ -14,7 +14,7 @@ from pathlib import Path
 
 from config import load_config, Config
 
-# config: Config = load_config(".env")
+config: Config = load_config(".env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
