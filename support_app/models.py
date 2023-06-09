@@ -26,7 +26,7 @@ class Agency(Base):
 class Agent(Base):
     name = models.CharField(max_length=100, verbose_name="Ism")
     uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", unique=True)
-    agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="AgentLIK")
+    agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="Agentlik")
     tg_id = models.IntegerField(unique=True, verbose_name="Telegram id", primary_key=True)
 
     def __str__(self):
@@ -53,11 +53,10 @@ class Project(Base):
 
 class Contract(Base):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name="Proekt")
-    agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="Agentlik")
     agent = models.ForeignKey(Agent, on_delete=models.CASCADE, verbose_name="Agent")
     inn = models.CharField(max_length=50, verbose_name="INN")
     code = models.CharField(max_length=50, verbose_name="Raqam")
-    status = models.BooleanField(default=False, verbose_name="Imzo")
+    status = models.BooleanField(default=True, verbose_name="Imzo")
 
     def __str__(self):
         return self.code
@@ -69,4 +68,4 @@ class Contract(Base):
 
 class Counter(Base):
     count = models.PositiveBigIntegerField(default=1)
-    dat = models.PositiveIntegerField(default=int(datetime.now().strftime("%d")))
+    day = models.PositiveIntegerField(default=int(datetime.now().strftime("%d")))

@@ -9,6 +9,12 @@ class AgentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class CountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Counter
+        fields = '__all__'
+
+
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
@@ -24,11 +30,5 @@ class AgencySerializer(serializers.ModelSerializer):
 class ContractSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contract
-        fields = '__all__'
-
-
-class CertificateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Certificate
         fields = '__all__'
 
