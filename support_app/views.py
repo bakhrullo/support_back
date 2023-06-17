@@ -64,7 +64,7 @@ class ContractView(APIView):
 
     def get(self, request):
         try:
-            contract = Contract.objects.get(id=request.query_params.get("project"), inn=request.query_params.get("inn"))
+            contract = Contract.objects.get(project_id=request.query_params.get("project"), inn=request.query_params.get("inn"))
             return Response(data={"status": contract.status, "number": contract.code}, status=status.HTTP_200_OK)
-        except:
+        except Contract.DoesNotExist:
             return Response(data={"status": "Not Found"}, status=status.HTTP_404_NOT_FOUND)

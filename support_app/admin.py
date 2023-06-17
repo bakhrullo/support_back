@@ -13,7 +13,7 @@ class AgentAdmin(admin.ModelAdmin):
 
 class ContractAdmin(admin.ModelAdmin):
     list_display = ['id', 'project', 'agent', 'inn', 'code', 'status']
-    list_filter = ['id', 'status']
+    list_filter = ['id', 'status', 'created_at', 'updated_at']
     list_editable = ['status']
     search_fields = ['inn', 'code']
 
@@ -34,7 +34,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 admin.site.unregister(Group)
 admin.site.register(Agency, AgencyAdmin)
-# admin.site.register(Counter)
+#admin.site.register(Counter)
 admin.site.register(Agent, AgentAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Contract, ContractAdmin)

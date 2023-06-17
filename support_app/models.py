@@ -27,7 +27,7 @@ class Agent(Base):
     name = models.CharField(max_length=100, verbose_name="Ism")
     uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", unique=True)
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="Agentlik")
-    tg_id = models.IntegerField(unique=True, verbose_name="Telegram id", primary_key=True)
+    tg_id = models.BigIntegerField(unique=True, verbose_name="Telegram id", primary_key=True)
 
     def __str__(self):
         return self.name
