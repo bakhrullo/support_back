@@ -3,6 +3,7 @@ from rest_framework.generics import *
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from django.forms.models import model_to_dict
 from .serializers import *
 
 
@@ -38,15 +39,14 @@ class ProjectGetView(RetrieveAPIView):
     queryset = Project.objects.all()
 
 
-class ProjectView(ListAPIView):
-    serializer_class = ProjectSerializer
-
-    def get_queryset(self):
-        if self.request.query_params.get('option') == 'user':
-            agent = Agent.objects.get(tg_id=self.request.query_params.get('id'))
-            return Project.objects.filter(agency=agent.agency)
-        return Project.objects.filter(id=self.request.query_params.get('id'))
-
+class ProjectView(APIView):
+    def get(self, request):
+        res = []
+        agent = Agent.objects.get(tg_id=self.request.query_params.get('id'))
+        for i in agent.agency.all():
+            for d in i.project.all():
+                res.append(ProjectSerializer(d).data)
+        return Response(data=res, status=status.HTTP_200_OK)
 
 class AgencyView(ListAPIView):
     serializer_class = AgentSerializer

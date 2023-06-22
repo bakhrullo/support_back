@@ -26,8 +26,11 @@ class Agency(Base):
 class Agent(Base):
     name = models.CharField(max_length=100, verbose_name="Ism")
     uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", unique=True)
-    agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="Agentlik")
+    agency = models.ManyToManyField(Agency, verbose_name="Agentlik")
     tg_id = models.BigIntegerField(unique=True, verbose_name="Telegram id", primary_key=True)
+
+    def show_agency(self):
+        return ",\n".join([g.name for g in self.agency.all()])
 
     def __str__(self):
         return self.name
@@ -40,7 +43,7 @@ class Agent(Base):
 class Project(Base):
     name = models.CharField(max_length=100, verbose_name="Nomi")
     uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", unique=True)
-    agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="Agentlik")
+    agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="Agentlik", related_name="project")
     file = models.FileField(verbose_name="Sertifikat", null=True, blank=True)
 
     def __str__(self):
