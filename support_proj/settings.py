@@ -30,7 +30,7 @@ SECRET_KEY = "dwdwqedfwerfsafwe"
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://telegram.maxone.uz']
 
 # Application definition
 
