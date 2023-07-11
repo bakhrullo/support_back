@@ -25,7 +25,7 @@ class Agency(Base):
 
 class Agent(Base):
     name = models.CharField(max_length=100, verbose_name="Ism")
-    uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", unique=True)
+    uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", unique=True, null=True, blank=True)
     agency = models.ManyToManyField(Agency, verbose_name="Agentlik")
     tg_id = models.BigIntegerField(unique=True, verbose_name="Telegram id", primary_key=True)
 
@@ -59,6 +59,7 @@ class Contract(Base):
     agent = models.ForeignKey(Agent, on_delete=models.CASCADE, verbose_name="Agent")
     inn = models.CharField(max_length=50, verbose_name="INN")
     code = models.CharField(max_length=50, verbose_name="Raqam")
+    signature = models.TextField(verbose_name="Hujjat turi")
     status = models.BooleanField(default=True, verbose_name="Imzo")
 
     def __str__(self):
