@@ -44,6 +44,7 @@ class Project(Base):
     name = models.CharField(max_length=100, verbose_name="Nomi")
     uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", unique=True)
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="Agentlik", related_name="project")
+    signature = models.TextField(verbose_name="Hujjat turi")
     file = models.FileField(verbose_name="Sertifikat", null=True, blank=True)
 
     def __str__(self):
@@ -59,7 +60,6 @@ class Contract(Base):
     agent = models.ForeignKey(Agent, on_delete=models.CASCADE, verbose_name="Agent")
     inn = models.CharField(max_length=50, verbose_name="INN")
     code = models.CharField(max_length=50, verbose_name="Raqam")
-    signature = models.TextField(verbose_name="Hujjat turi")
     status = models.BooleanField(default=True, verbose_name="Imzo")
 
     def __str__(self):
