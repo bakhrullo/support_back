@@ -5,9 +5,9 @@ from .models import *
 
 
 class AgentAdmin(admin.ModelAdmin):
-    list_display = ['tg_id', 'name', 'uniq', 'show_agency', 'created_at']
+    list_display = ['tg_id', 'name', 'uniq', 'is_boss', 'show_agency', 'created_at']
     list_filter = ['tg_id', 'name', 'tg_id', 'created_at']
-    list_editable = ['name', 'uniq']
+    list_editable = ['name', 'uniq', 'is_boss']
     search_fields = ['name', 'uniq', 'tg_id']
 
 
