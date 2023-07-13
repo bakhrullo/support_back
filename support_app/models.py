@@ -27,6 +27,7 @@ class Agent(Base):
     name = models.CharField(max_length=100, verbose_name="Ism")
     uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", null=True, blank=True)
     agency = models.ManyToManyField(Agency, verbose_name="Agentlik")
+    is_boss = models.BooleanField(default=False, verbose_name="Qo'shimcha funktsional")
     tg_id = models.BigIntegerField(unique=True, verbose_name="Telegram id", primary_key=True)
 
     def show_agency(self):
@@ -42,7 +43,7 @@ class Agent(Base):
 
 class Project(Base):
     name = models.CharField(max_length=100, verbose_name="Nomi")
-    uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", unique=True)
+    uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni")
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="Agentlik", related_name="project")
     signature = models.TextField(verbose_name="Hujjat turi")
     file = models.FileField(verbose_name="Sertifikat", null=True, blank=True)
