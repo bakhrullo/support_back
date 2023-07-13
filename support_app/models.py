@@ -25,7 +25,7 @@ class Agency(Base):
 
 class Agent(Base):
     name = models.CharField(max_length=100, verbose_name="Ism")
-    uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", unique=True, null=True, blank=True)
+    uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", null=True, blank=True)
     agency = models.ManyToManyField(Agency, verbose_name="Agentlik")
     tg_id = models.BigIntegerField(unique=True, verbose_name="Telegram id", primary_key=True)
 
