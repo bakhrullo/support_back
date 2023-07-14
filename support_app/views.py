@@ -68,3 +68,10 @@ class ContractView(APIView):
             return Response(data={"status": contract.status, "number": contract.code}, status=status.HTTP_200_OK)
         except Contract.DoesNotExist:
             return Response(data={"status": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
+
+
+class ContractListView(ListAPIView):
+    serializer_class = ContractSerializer
+
+    def get_queryset(self):
+        return Contract.objects.filter(agent_id=self.request.query_params.get("id"))

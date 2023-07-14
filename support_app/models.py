@@ -73,4 +73,4 @@ class Contract(Base):
 
 class Counter(Base):
     count = models.PositiveBigIntegerField(default=1)
-    day = models.PositiveIntegerField(default=int(datetime.now().strftime("%d")))
+    year = models.PositiveIntegerField(default=int(datetime.now().strftime("%Y")))
