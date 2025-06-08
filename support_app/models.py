@@ -1,76 +1,85 @@
-from django.db import models
+import uuid
 
+from django.db import models
 from datetime import datetime
 
 
 class Base(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Qo'shilgan sana")
-    updated_at = models.DateTimeField(auto_now=True, verbose_name="O'zgargan sana")
+    created_at = models.DateTimeField(verbose_name="Дата добавления", auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name="Дата изменения", auto_now=True)
 
     class Meta:
         abstract = True
 
 
-class Agency(Base):
-    name = models.CharField(max_length=100, verbose_name="Nomi")
-    uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", unique=True)
+class Brand(Base):
+    name = models.CharField(max_length=100, verbose_name="Название")
+    uniq = models.CharField(max_length=100, verbose_name="Буква или номер", unique=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = "Agentliklar"
-        verbose_name_plural = "Agentliklar"
+        verbose_name = "Бренд"
+        verbose_name_plural = "Бренды"
 
 
 class Agent(Base):
-    name = models.CharField(max_length=100, verbose_name="Ism")
-    uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni", null=True, blank=True)
-    agency = models.ManyToManyField(Agency, verbose_name="Agentlik")
-    is_boss = models.BooleanField(default=False, verbose_name="Qo'shimcha funktsional")
-    tg_id = models.BigIntegerField(unique=True, verbose_name="Telegram id", primary_key=True)
+    name = models.CharField(max_length=100, verbose_name="Имя")
+    uniq = models.CharField(max_length=100, verbose_name="Буква или номер", null=True, blank=True)
+    brand = models.ManyToManyField(Brand, verbose_name="Бренд")
+    is_boss = models.BooleanField(default=False, verbose_name="Дополнительный функционал")
+    is_permission = models.BooleanField(default=False, verbose_name="Выходные дни")
+    tg_id = models.BigIntegerField(unique=True, verbose_name="Telegram ID")
 
-    def show_agency(self):
-        return ",\n".join([g.name for g in self.agency.all()])
+    def show_brand(self):
+        return ",\n".join([g.name for g in self.brand.all()])
+
+    show_brand.short_description = "Бренд"
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = "Agentlar"
-        verbose_name_plural = "Agentlar"
+        verbose_name = "Агент"
+        verbose_name_plural = "Агенты"
 
 
 class Project(Base):
-    name = models.CharField(max_length=100, verbose_name="Nomi")
-    uniq = models.CharField(max_length=100, verbose_name="Harf yoki soni")
-    agency = models.ForeignKey(Agency, on_delete=models.CASCADE, verbose_name="Agentlik", related_name="project")
-    signature = models.TextField(verbose_name="Hujjat turi")
-    file = models.FileField(verbose_name="Sertifikat", null=True, blank=True)
+    name = models.CharField(max_length=100, verbose_name="Название")
+    uniq = models.CharField(max_length=100, verbose_name="Буква или номер")
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="Бренд", related_name="project")
+    signature = models.TextField(verbose_name="Тип документа")
+    file = models.FileField(verbose_name="Сертификат", null=True, blank=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = "Proektlar"
-        verbose_name_plural = "Proektlar"
+        verbose_name = "Проект"
+        verbose_name_plural = "Проекты"
 
 
 class Contract(Base):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name="Proekt")
-    agent = models.ForeignKey(Agent, on_delete=models.CASCADE, verbose_name="Agent")
-    inn = models.CharField(max_length=50, verbose_name="INN")
-    code = models.CharField(max_length=50, verbose_name="Raqam")
-    status = models.BooleanField(default=True, verbose_name="Imzo")
+    project = models.ForeignKey(Project, on_delete=models.SET_NULL,  null=True, blank=False, verbose_name="Проект")
+    agent = models.ForeignKey(Agent, on_delete=models.SET_NULL, null=True, blank=False, verbose_name="Агент")
+    inn = models.CharField(max_length=50, verbose_name="ИНН")
+    firm = models.CharField(max_length=50, verbose_name="Название фирмы", null=True)
+    code = models.CharField(max_length=50, verbose_name="Номер")
+    status = models.BooleanField(default=True, verbose_name="Подпись")
 
     def __str__(self):
         return self.code
 
     class Meta:
-        verbose_name = "Kontraklar"
-        verbose_name_plural = "Kontraklar"
+        verbose_name = "Контракт"
+        verbose_name_plural = "Контракты"
 
 
 class Counter(Base):
-    count = models.PositiveBigIntegerField(default=1)
+    count = models.PositiveBigIntegerField(default=1, verbose_name="Счёт")
     year = models.PositiveIntegerField(default=int(datetime.now().strftime("%Y")))
+
+    class Meta:
+        verbose_name = "Счётчик для контрактов"
+        verbose_name_plural = "Счётчик для контрактов"

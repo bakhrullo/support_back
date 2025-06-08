@@ -21,9 +21,9 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class AgencySerializer(serializers.ModelSerializer):
+class BrandSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Agency
+        model = Brand
         fields = '__all__'
 
 
