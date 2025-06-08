@@ -4,16 +4,16 @@ JAZZ_SETTINGS = {
     "site_title": "Админ панель",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "SUPPORT SAMARQAND",
+    "site_header": "STAR GROUP",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "SUPPORT SAMARQAND",
+    "site_brand": "  ",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "custom_admin/logo/support_back.svg",
+    "site_logo": "custom_admin/logo/Logo-white.svg",
     #
     # # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-    # "login_logo": 'custom_admin/logo/support_back.svg',
+    "login_logo": 'custom_admin/logo/support_back.svg',
 
     # Logo to use for login form in dark themes (defaults to login_logo)
     "login_logo_dark": None,
@@ -121,7 +121,7 @@ JAZZ_SETTINGS = {
     # UI Tweaks #
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
-    # "custom_css": "custom_admin/css/custom.css",
+    "custom_css": "custom_admin/css/custom.css",
     # "custom_js": "custom_admin/js/custom.js",
     # Whether to link font from fonts.googleapis.com (use custom_css to supply font otherwise)
     "use_google_fonts_cdn": True,
@@ -143,6 +143,7 @@ JAZZ_SETTINGS = {
     # Add a language dropdown into the admin
 
 }
+
 JAZZMIN_UI = {
     "navbar_small_text": False,
     "footer_small_text": False,

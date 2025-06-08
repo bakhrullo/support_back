@@ -48,5 +48,5 @@ admin.site.register(Agent, AgentAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Contract, ContractAdmin)
 
-admin.site.site_title = 'Support Samarqand'
-admin.site.site_header = 'Support Samarqand'
+admin.site.site_title = 'Support S'
+admin.site.site_header = 'Support S'
