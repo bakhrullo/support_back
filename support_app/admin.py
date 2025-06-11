@@ -24,8 +24,8 @@ class BrandAdmin(admin.ModelAdmin):
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'uniq', 'brand', 'file', 'created_at']
-    list_editable = ['name', 'uniq', 'brand']
+    list_display = ['id', 'name', 'uniq', 'is_special', 'brand', 'file', 'created_at']
+    list_editable = ['name', 'uniq', 'brand', 'is_special']
     search_fields = ['name', 'uniq']
 
 

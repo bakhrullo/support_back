@@ -50,6 +50,7 @@ class Project(Base):
     uniq = models.CharField(max_length=100, verbose_name="Буква или номер")
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="Бренд", related_name="project")
     signature = models.TextField(verbose_name="Тип документа")
+    is_special = models.BooleanField(default=False, verbose_name="Спец пдф")
     file = models.FileField(verbose_name="Сертификат", null=True, blank=True)
 
     def __str__(self):
